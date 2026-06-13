@@ -1,0 +1,332 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "highlight.js/styles/tokyo-night-light.css" layer(hljs);
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* ── Light theme (default) ─────────────────────────────── */
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.58 0.17 237);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.94 0.04 237);
+  --accent-foreground: oklch(0.3 0.1 237);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.68 0.15 237);
+  --code-bg: oklch(0.96 0 0);
+
+  --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --expo-in: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* ── Dark variables — explicit .dark class ─────────────── */
+:root.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.75 0.15 230);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.25 0.05 237);
+  --accent-foreground: oklch(0.85 0.1 230);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.65 0.14 230);
+  --code-bg: #1a1b26;
+}
+
+/* ── Dark variables — system preference ── */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.75 0.15 230);
+    --primary-foreground: oklch(0.145 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.25 0.05 237);
+    --accent-foreground: oklch(0.85 0.1 230);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.65 0.14 230);
+    --code-bg: #1a1b26;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}
+
+/* ── highlight.js — Tokyo Night Dark overrides ─────────── */
+@layer hljs-dark {
+  :root.dark pre code.hljs,
+  :root.dark code.hljs {
+    background: #1a1b26;
+    color: #a9b1d6;
+  }
+  :root.dark pre code.hljs { display: block; overflow-x: auto; padding: 1em; }
+  :root.dark code.hljs { padding: 3px 5px; }
+  :root.dark .hljs-keyword, :root.dark .hljs-literal, :root.dark .hljs-symbol, :root.dark .hljs-name { color: #bb9af7; }
+  :root.dark .hljs-link { color: #bb9af7; text-decoration: underline; }
+  :root.dark .hljs-built_in, :root.dark .hljs-type { color: #2ac3de; }
+  :root.dark .hljs-number, :root.dark .hljs-class { color: #ff9e64; }
+  :root.dark .hljs-string, :root.dark .hljs-meta .hljs-string { color: #9ece6a; }
+  :root.dark .hljs-regexp, :root.dark .hljs-template-tag { color: #b4f9f8; }
+  :root.dark .hljs-subst, :root.dark .hljs-function, :root.dark .hljs-title, :root.dark .hljs-params, :root.dark .hljs-formula { color: #a9b1d6; }
+  :root.dark .hljs-comment, :root.dark .hljs-quote { color: #565f89; font-style: italic; }
+  :root.dark .hljs-doctag { color: #7aa2f7; }
+  :root.dark .hljs-meta, :root.dark .hljs-meta .hljs-keyword, :root.dark .hljs-tag { color: #f7768e; }
+  :root.dark .hljs-variable, :root.dark .hljs-template-variable { color: #ff9e64; }
+  :root.dark .hljs-attr, :root.dark .hljs-attribute { color: #73daca; }
+  :root.dark .hljs-section { color: #7aa2f7; font-weight: bold; }
+  :root.dark .hljs-emphasis { font-style: italic; }
+  :root.dark .hljs-strong { font-weight: bold; }
+  :root.dark .hljs-bullet, :root.dark .hljs-selector-tag, :root.dark .hljs-selector-id, :root.dark .hljs-selector-class, :root.dark .hljs-selector-attr, :root.dark .hljs-selector-pseudo { color: #f7768e; }
+  :root.dark .hljs-addition { color: #9ece6a; background: rgba(158,206,106,.12); }
+  :root.dark .hljs-deletion { color: #f7768e; background: rgba(247,118,142,.12); }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) pre code.hljs, :root:not(.light) code.hljs { background: #1a1b26; color: #a9b1d6; }
+    :root:not(.light) pre code.hljs { display: block; overflow-x: auto; padding: 1em; }
+    :root:not(.light) code.hljs { padding: 3px 5px; }
+    :root:not(.light) .hljs-keyword, :root:not(.light) .hljs-literal, :root:not(.light) .hljs-symbol, :root:not(.light) .hljs-name { color: #bb9af7; }
+    :root:not(.light) .hljs-built_in, :root:not(.light) .hljs-type { color: #2ac3de; }
+    :root:not(.light) .hljs-number, :root:not(.light) .hljs-class { color: #ff9e64; }
+    :root:not(.light) .hljs-string, :root:not(.light) .hljs-meta .hljs-string { color: #9ece6a; }
+    :root:not(.light) .hljs-comment, :root:not(.light) .hljs-quote { color: #565f89; font-style: italic; }
+    :root:not(.light) .hljs-doctag { color: #7aa2f7; }
+    :root:not(.light) .hljs-meta, :root:not(.light) .hljs-meta .hljs-keyword, :root:not(.light) .hljs-tag { color: #f7768e; }
+    :root:not(.light) .hljs-variable, :root:not(.light) .hljs-template-variable { color: #ff9e64; }
+    :root:not(.light) .hljs-attr, :root:not(.light) .hljs-attribute { color: #73daca; }
+    :root:not(.light) .hljs-section { color: #7aa2f7; font-weight: bold; }
+    :root:not(.light) .hljs-emphasis { font-style: italic; }
+    :root:not(.light) .hljs-strong { font-weight: bold; }
+    :root:not(.light) .hljs-bullet, :root:not(.light) .hljs-selector-tag, :root:not(.light) .hljs-selector-id, :root:not(.light) .hljs-selector-class { color: #f7768e; }
+    :root:not(.light) .hljs-addition { color: #9ece6a; background: rgba(158,206,106,.12); }
+    :root:not(.light) .hljs-deletion { color: #f7768e; background: rgba(247,118,142,.12); }
+  }
+}
+
+/* ── Reading typography ─────────────────────────────────── */
+.prose-container {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+.prose-container pre {
+  background: var(--code-bg);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.75em 0;
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.prose-container pre code.hljs {
+  background: transparent;
+  border-radius: 0.5rem;
+}
+
+.prose-container h1,
+.prose-container h2,
+.prose-container h3,
+.prose-container h4 {
+  font-feature-settings: "palt";
+  line-height: 1.4;
+}
+
+.prose-container h1 {
+  scroll-margin-top: 5rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.prose-container h2 {
+  scroll-margin-top: 5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.prose-container h3 {
+  scroll-margin-top: 5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-container h4 {
+  scroll-margin-top: 5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-container p {
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.prose-container a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+
+.prose-container a:hover {
+  opacity: 0.7;
+}
+
+.prose-container h1 a,
+.prose-container h2 a,
+.prose-container h3 a,
+.prose-container h4 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.prose-container ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-container ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-container li {
+  line-height: 1.85;
+  margin-top: 0.25rem;
+}
+
+.prose-container blockquote {
+  border-left: 4px solid color-mix(in oklab, var(--primary) 30%, transparent);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--muted-foreground);
+  margin: 1.25rem 0;
+}
+
+.prose-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.prose-container th {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  background: var(--muted);
+  font-weight: 600;
+  text-align: left;
+}
+
+.prose-container td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+}
+
+.prose-container hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.prose-container img {
+  border-radius: 0.5rem;
+  max-width: 100%;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.prose-container code:not(pre code) {
+  background: var(--muted);
+  color: var(--foreground);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.875em;
+  font-family: var(--font-mono), monospace;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+}

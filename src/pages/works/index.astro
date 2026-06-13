@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const works: unknown[] = [];
+---
+
+<Layout title="WORKS" description="制作物・プロジェクト一覧">
+  <div class="max-w-3xl mx-auto">
+    <section class="py-10 mb-8">
+      <h1 class="text-4xl font-bold tracking-tight mb-3">WORKS</h1>
+      <p class="text-muted-foreground text-lg">制作物・プロジェクト</p>
+    </section>
+
+    {works.length > 0 ? (
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- 作品カードをここに表示 -->
+      </div>
+    ) : (
+      <p class="text-muted-foreground py-16 text-center">準備中です。</p>
+    )}
+  </div>
+</Layout>

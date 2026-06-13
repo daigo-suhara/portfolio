@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Timeline } from "../components/Timeline";
+import type { TimelineItem } from "../components/Timeline";
+const siteUrl = import.meta.env.SITE ?? "https://daigo-suhara.com";
+
+const career: TimelineItem[] = [
+  {
+    year: "2018.04",
+    title: "舞鶴工業高等専門学校　電子制御工学科　入学",
+    description: "中学卒業後から寮生活を始める．",
+  },
+  {
+    year: "2023.03",
+    title: "舞鶴工業高等専門学校　電子制御工学科　卒業",
+    description: "5年制の高専で機械工学，電気工学，制御工学などを学ぶ",
+  },
+  {
+    year: "2023.04",
+    title: "関西大学　総合情報学部　２年次編入学",
+    description:
+      "工学以外のことにも触れ自分の可能性を広げたいと考え，文理融合の学部を選択．",
+  },
+  {
+    year: "2026.03",
+    title: "関西大学　総合情報学部　卒業",
+    description: "在学中に大学内のシステム開発や，企業の受注案件を請け負う．",
+  },
+  {
+    year: "2026.04",
+    title: "関西大学　大学院　総合情報学研究科　入学",
+    description: "現在",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "須原大護",
+  alternateName: "Daigo Suhara",
+  url: siteUrl,
+  sameAs: ["https://github.com/daigo-suhara", "https://x.com/daigo_suhara"],
+  jobTitle: "大学院生",
+  affiliation: {
+    "@type": "Organization",
+    name: "関西大学大学院 総合情報学研究科",
+  },
+  description:
+    "須原大護のポートフォリオサイト．技術・研究・趣味のことを発信しています．",
+};
+---
+
+<Layout
+  title="HOME"
+  description="須原大護のポートフォリオサイト．技術・研究・趣味のことを発信しています．"
+  ogType="profile"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <div class="max-w-3xl mx-auto">
+    <!-- Hero -->
+    <section class="py-20 flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-16">
+      <div class="flex-1 text-center sm:text-left">
+        <h1 class="font-bold tracking-tight mb-1">
+          <span class="text-3xl">須原 大護 - Daigo Suhara</span>
+        </h1>
+        <p class="text-xl text-muted-foreground mt-4 mb-8">
+          技術が好きな大学院生（修士1年）です
+        </p>
+        <div class="flex gap-4 justify-center sm:justify-start">
+          <a
+            href="/works"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 cursor-pointer"
+          >
+            WORKS
+          </a>
+          <a
+            href="/blog"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 cursor-pointer"
+          >
+            BLOG
+          </a>
+        </div>
+      </div>
+
+      <div class="shrink-0">
+        <div class="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-primary/30">
+          <img
+            src="/avatar.jpg"
+            alt="Daigo Suhara"
+            class="w-full h-full object-cover"
+            width="192"
+            height="192"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Career -->
+    <section class="pb-20">
+      <h2 class="text-2xl font-bold mb-2">Career</h2>
+      <p class="text-muted-foreground text-sm mb-8">経歴・略歴</p>
+      <Timeline items={career} client:visible />
+    </section>
+  </div>
+</Layout>
