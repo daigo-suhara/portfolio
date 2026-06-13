@@ -1,1 +1,0 @@
-import{j as o}from"./jsx-runtime.D_zvdyIk.js";import{T as r}from"./table-of-contents.DH7-kQ5K.js";import"./index.roP3k_Cl.js";import"./utils.DCADjnpI.js";function s({headings:e}){if(e.length===0)return null;const n=e.map(t=>({id:t.id,label:t.text,level:Math.min(Math.max(t.level,1),3)}));return o.jsx(r,{items:n})}export{s as TableOfContents};
