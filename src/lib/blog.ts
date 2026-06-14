@@ -1,7 +1,7 @@
 const QIITA_USER_ID = "daigo-suhara";
 const QIITA_LIST_PER_PAGE = 20;
 const QIITA_LIST_PAGES = 1;
-const FETCH_TIMEOUT_MS = 1000;
+const FETCH_TIMEOUT_MS = 5000;
 
 export type BlogSource = "qiita";
 
@@ -142,3 +142,4 @@ export async function listBlogStaticParams() {
   const posts = await listBlogPosts();
   return posts.map((post) => ({ id: post.id }));
 }
+

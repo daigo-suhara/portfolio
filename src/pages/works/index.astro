@@ -1,19 +1,52 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { works } from "../../lib/works";
 
-const works: unknown[] = [];
+const byYear = works.reduce<Record<number, typeof works>>((acc, work) => {
+  (acc[work.year] ??= []).push(work);
+  return acc;
+}, {});
+const years = Object.keys(byYear).map(Number).sort((a, b) => b - a);
 ---
 
 <Layout title="WORKS" description="制作物・プロジェクト一覧">
   <div class="max-w-3xl mx-auto">
-    <section class="py-10 mb-8">
-      <h1 class="text-4xl font-bold tracking-tight mb-3">WORKS</h1>
-      <p class="text-muted-foreground text-lg">制作物・プロジェクト</p>
+    <section class="pt-12 pb-8">
+      <h1 class="text-3xl font-bold tracking-tight mb-2">WORKS</h1>
+      <p class="text-muted-foreground text-sm">仕事・プロジェクト・研究など</p>
     </section>
 
     {works.length > 0 ? (
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- 作品カードをここに表示 -->
+      <div class="space-y-10">
+        {years.map((year) => (
+          <section>
+            <div class="flex items-center gap-4 mb-4">
+              <h2 class="text-2xl font-bold tracking-tight shrink-0">{year}</h2>
+              <div class="h-px bg-border flex-1"></div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {byYear[year].map((work) => (
+                <a href={`/works/${work.id}`} class="group block h-full">
+                  <div class="h-full flex flex-col p-5 rounded-2xl border border-border bg-card hover:border-primary/50 hover:shadow-sm transition-all duration-200">
+                    <div class="flex flex-wrap gap-1.5 mb-3">
+                      <span class="text-[11px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium border border-border">
+                        {work.type === "paper" ? "論文" : "プロジェクト"}
+                      </span>
+                    </div>
+                    <h3 class="font-semibold text-[0.9375rem] leading-snug line-clamp-2 mb-2 group-hover:text-primary transition-colors duration-150">
+                      {work.title}
+                    </h3>
+                    {work.description && (
+                      <p class="text-sm text-muted-foreground line-clamp-3 leading-relaxed flex-1">
+                        {work.description}
+                      </p>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     ) : (
       <p class="text-muted-foreground py-16 text-center">準備中です。</p>

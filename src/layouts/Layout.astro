@@ -95,12 +95,12 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     </style>
   </head>
   <body
-    class="bg-background text-foreground antialiased min-h-screen"
+    class="bg-background text-foreground antialiased min-h-screen flex flex-col"
     style="font-family: var(--font-sans), system-ui, sans-serif;"
   >
     <SplashScreen client:load />
     <Header />
-    <main class="px-4">
+    <main class="px-4 flex-1">
       <slot />
     </main>
     <footer class="border-t mt-16 py-8">
