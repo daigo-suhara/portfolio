@@ -13,7 +13,7 @@ const navLinks = [
 ---
 
 <header class="sticky top-0 z-50 bg-background/70 backdrop-blur-md border-b border-border/40">
-  <div class="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <div class="px-4 sm:px-6 lg:px-8 h-16 grid grid-cols-[1fr_auto_1fr] items-center">
     <a
       href="/"
       class="flex items-center gap-2 text-xl hover:opacity-70 transition-opacity whitespace-nowrap"
@@ -22,28 +22,29 @@ const navLinks = [
       <img src="/loading-icon.png" alt="" class="h-12 w-12 object-contain" aria-hidden="true" />
       Daigo Suhara
     </a>
-    <div class="flex items-center gap-2">
-      <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-1 bg-muted/60 border border-border/60 rounded-full px-1.5 py-1.5">
-        {navLinks.map(({ href, label }) => {
-          const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
-          return (
-            <a
-              href={href}
-              class:list={[
-                "px-4 py-1 rounded-full text-sm transition-all duration-200",
-                isActive
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              ]}
-              style="font-family: var(--font-header)"
-            >
-              {label}
-            </a>
-          );
-        })}
-      </nav>
 
+    <!-- Desktop nav (center) -->
+    <nav class="hidden md:flex items-center gap-1 bg-muted/60 border border-border/60 rounded-full px-1.5 py-1.5">
+      {navLinks.map(({ href, label }) => {
+        const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+        return (
+          <a
+            href={href}
+            class:list={[
+              "px-4 py-1 rounded-full text-sm transition-all duration-200",
+              isActive
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            ]}
+            style="font-family: var(--font-header)"
+          >
+            {label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="flex items-center gap-2 justify-self-end">
       <!-- Desktop social links -->
       <div class="hidden md:flex items-center gap-1">
         <a
