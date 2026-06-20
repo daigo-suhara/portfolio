@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, X } from "lucide-react";
+import { RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { PostCard } from "@/components/PostCard";
 import type { BlogPost } from "@/lib/blog";
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ export function BlogList({ posts, allTags }: BlogListProps) {
     <div>
       {/* 検索バー */}
       <div className="relative mb-4">
-        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 pointer-events-none" />
+        <RiSearchLine className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 pointer-events-none" />
         <input
           type="text"
           placeholder="タイトル・タグで検索..."
@@ -55,7 +55,7 @@ export function BlogList({ posts, allTags }: BlogListProps) {
             className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/50 hover:text-muted-foreground transition-colors"
             aria-label="検索をクリア"
           >
-            <X className="h-4 w-4" />
+            <RiCloseLine className="h-4 w-4" />
           </button>
         )}
       </div>
@@ -85,7 +85,7 @@ export function BlogList({ posts, allTags }: BlogListProps) {
               onClick={() => setSelectedTags([])}
               className="px-3 py-1 rounded-full text-xs text-muted-foreground/60 hover:text-muted-foreground flex items-center gap-1 transition-colors"
             >
-              <X className="h-3 w-3" />
+              <RiCloseLine className="h-3 w-3" />
               クリア
             </button>
           )}

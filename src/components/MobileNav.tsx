@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { House, Sparkles, NotebookPen, Menu } from "lucide-react";
+import { RiHome5Line, RiBriefcase3Line, RiNewspaperLine, RiMenuLine } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -17,10 +17,10 @@ const navLinks = [
   { href: "/blog", label: "BLOG" },
 ];
 
-const icons: Record<string, React.FC<{ className?: string; strokeWidth?: number }>> = {
-  "/": House,
-  "/works": Sparkles,
-  "/blog": NotebookPen,
+const icons: Record<string, React.FC<{ className?: string }>> = {
+  "/": RiHome5Line,
+  "/works": RiBriefcase3Line,
+  "/blog": RiNewspaperLine,
 };
 
 const socialLinks = [
@@ -60,7 +60,7 @@ export function MobileNav({ currentPath }: MobileNavProps) {
           className="md:hidden rounded-full"
           aria-label="メニューを開く"
         >
-          <Menu className="h-4 w-4" />
+          <RiMenuLine className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent
@@ -102,12 +102,9 @@ export function MobileNav({ currentPath }: MobileNavProps) {
                 style={{ fontFamily: "var(--font-header)" }}
               >
                 {Icon && (
-                  <Icon className="h-5 w-5 shrink-0" strokeWidth={1.75} />
+                  <Icon className="h-5 w-5 shrink-0" />
                 )}
                 {label}
-                {isActive && (
-                  <span className="ml-auto text-primary text-xs">●</span>
-                )}
               </a>
             );
           })}
