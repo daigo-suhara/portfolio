@@ -4,7 +4,6 @@ import { BlogList } from "../../components/BlogList";
 import { listBlogPosts } from "../../lib/blog";
 
 const posts = await listBlogPosts();
-const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)));
 ---
 
 <Layout title="BLOG" description="技術と趣味のこと">
@@ -14,6 +13,6 @@ const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)));
       <p class="text-muted-foreground text-sm">{posts.length} 記事</p>
     </section>
 
-    <BlogList posts={posts} allTags={allTags} client:load />
+    <BlogList posts={posts} client:load />
   </div>
 </Layout>

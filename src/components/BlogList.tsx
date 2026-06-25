@@ -2,40 +2,26 @@ import { useState, useMemo } from "react";
 import { RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { PostCard } from "@/components/PostCard";
 import type { BlogPost } from "@/lib/blog";
-import { cn } from "@/lib/utils";
 
 interface BlogListProps {
   posts: BlogPost[];
-  allTags: string[];
 }
 
-export function BlogList({ posts, allTags }: BlogListProps) {
+export function BlogList({ posts }: BlogListProps) {
   const [query, setQuery] = useState("");
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-    );
-  };
 
   const filtered = useMemo(() => {
     return posts.filter((post) => {
-      const matchesQuery =
+      return (
         query === "" ||
         post.title.toLowerCase().includes(query.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-        post.tags.some((t) => t.toLowerCase().includes(query.toLowerCase()));
-
-      const matchesTags =
-        selectedTags.length === 0 ||
-        selectedTags.every((t) => post.tags.includes(t));
-
-      return matchesQuery && matchesTags;
+        post.tags.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+      );
     });
-  }, [posts, query, selectedTags]);
+  }, [posts, query]);
 
-  const isFiltering = query !== "" || selectedTags.length > 0;
+  const isFiltering = query !== "";
 
   return (
     <div>
@@ -60,40 +46,8 @@ export function BlogList({ posts, allTags }: BlogListProps) {
         )}
       </div>
 
-      {/* タグフィルター */}
-      {allTags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {allTags.map((tag) => {
-            const active = selectedTags.includes(tag);
-            return (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className={cn(
-                  "px-3 py-1 rounded-full text-xs font-medium transition-all duration-150",
-                  active
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground",
-                )}
-              >
-                {tag}
-              </button>
-            );
-          })}
-          {selectedTags.length > 0 && (
-            <button
-              onClick={() => setSelectedTags([])}
-              className="px-3 py-1 rounded-full text-xs text-muted-foreground/60 hover:text-muted-foreground flex items-center gap-1 transition-colors"
-            >
-              <RiCloseLine className="h-3 w-3" />
-              クリア
-            </button>
-          )}
-        </div>
-      )}
-
       {/* 件数 */}
-      <p className="text-xs text-muted-foreground/60 mb-5">
+      <p className="text-xs text-muted-foreground/60 mb-5 mt-6">
         {filtered.length} 件{isFiltering && " — フィルター中"}
       </p>
 
@@ -111,7 +65,7 @@ export function BlogList({ posts, allTags }: BlogListProps) {
           </p>
           {isFiltering && (
             <button
-              onClick={() => { setQuery(""); setSelectedTags([]); }}
+              onClick={() => setQuery("")}
               className="mt-3 text-xs text-primary hover:underline"
             >
               フィルターをリセット
